@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const ProductController = require('./controllers/ProductController');
 const UserController = require('./controllers/UserController');
+const ClientController = require('./controllers/ClientController');
 const Migration = require('./database/Migration');
 
 //Criando app:
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 app.use(Migration);
 app.use(UserController);
 app.use(ProductController);
+app.use(ClientController);
 
 //Listen (porta, callback):
 app.listen(3000, () => {

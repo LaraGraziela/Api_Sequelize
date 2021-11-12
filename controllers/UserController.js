@@ -8,21 +8,53 @@ UserController.get('/', (req, res) => {
     res.send('Página inicializada.')
 })
 
-//Fazendo o GET:
-UserController.get('/user/:name/:email/:password', async (req,res) => {
+//Fazendo o POST:
+UserController.post('/user', async (req,res) => {
     const newUser = await User.create({
-        name: req.params.name,
-        email: req.params.email,
-        password: req.params.password
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
     })
     res.send(newUser)
 })
 
-//Usando o POST:
-UserController.post('/user', (req, res) => {
-    res.send('Método POST')
+UserController.get('/user', async (req, res) => {
+    const user = await User.findAll();
+    res.json(user)
+
 })
 
+UserController.get('/user/:id', async (req, res) => {
+    const user = await User.findByPk(req.params.id);
+    res.json(user)
+
+})
+
+
+//Deletando o usuário:
+UserController.delete('/user/:id', async (req, res) => {
+    const user = await User.destroy({
+        where: { 
+            id: req.params.id
+        }
+    });
+    res.json('Usuário deletado.')
+
+})
+
+UserController.put('/user/:id', async (req, res) => {
+    const user = await User.update({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    },{
+        where: {
+            id: req.params.id
+        }
+    });
+    res.json('Usuário atualizado.')
+
+})
 
 // //Fazendo um get por parâmetro:
 // UserController.get('/parametro/:id/:name', (req, res) =>{

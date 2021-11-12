@@ -2,6 +2,7 @@ const express = require('express');
 const Migration = express.Router();
 const Product = require('../models/ProductModel')
 const User = require('../models/UserModel');
+const Client = require('../models/ClientModel')
 const db = require('./db');
 
 //Rota usada para criar todas as tabelas:
